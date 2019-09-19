@@ -1,26 +1,59 @@
-import React from 'react';
+import React {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import uuid from uuid;
+
+
+  const initialTeam = [
+    {
+        id: uuid(),
+        name: 'Max',
+        email: 'max@email.com',
+        role: 'software engineer',
+    },
+    {
+        id: uuid(),
+        name: 'Sam',
+        email: 'sam@email.com',
+        role: 'software engineer',
+    },
+    {
+    id: uuid(),
+        name: 'Ayomide',
+        email: 'Ayomide@email.com',
+        role: 'software engineer',
+    }
+];
+
+Const initialMemberForm = {
+  name: '',
+  email: '',
+  role: '',
+}
 
 function App() {
+
+  const[teamMembers, setTeamMembers] = useState(initialTeam);
+  const[memberForm, setMemberForm] = useState(initialMemberForm);
+  const handleInputChange = e => {
+    
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="team">
+        {
+          teamMembers.map(member =>(
+            <TeamMember
+                  key={member.id}
+                  member={member}
+                  handleEdit={handleEditMember}
+            />
+          ))
+        }
+        
       </header>
     </div>
   );
+}
 }
 
 export default App;
